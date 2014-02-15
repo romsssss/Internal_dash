@@ -1,0 +1,56 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #12b0c5;
+$value-color:       #fff;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+$label-color:       rgba(255, 255, 255, 0.7);
+$moreinfo-color:    rgba(255, 255, 255, 0.7);
+
+// ----------------------------------------------------------------------------
+// Widget-list styles
+// ----------------------------------------------------------------------------
+.widget-public-transports {
+
+  background-color: $background-color;
+  vertical-align: top;
+
+  .tal {
+    text-align: left;
+  }
+
+  .tac {
+    text-align: center;
+  }
+
+  .tar {
+    text-align: right;
+  }
+
+  .transport-value{
+    min-width: 75px;
+  }
+
+ .transport-title{
+    color: $title-color;
+    font-size:1em;
+    text-decoration: underline;
+    text-align: left;
+  }
+
+  .transport-img{
+    width: 64px;
+    height:64px;
+    margin-bottom: 5px;
+  }
+
+  .updated-at {
+    color: rgba(0, 0, 0, 0.3);
+  }
+
+  .more-info {
+    color: $moreinfo-color;
+  }
+
+}

@@ -1,0 +1,22 @@
+<h1 class="title" data-bind="title"></h1>
+
+<img class="background" src="/assets/ci.png">
+
+<table class="items">
+  <tr class="item" data-foreach-item="items" data-bind-class="item.build_status">
+    <td class="tal">
+      <span class="repo" data-bind="item.repo"></span>
+      <span class="branch" data-bind="item.branch"></span>
+    </td>
+    <td>
+      <span class="build_time" data-bind="item.build_start"></span>
+    </td>
+    <td class="tar">
+      <span class="build_number" data-bind="item.build_number"></span>
+      <img class="avatar" data-bind-src="item.avatar_url" data-bind-with="avatar_size" data-bind-height="avatar_size" />
+    </td>
+  </tr>
+</table>
+
+<p class="more-info" data-bind="moreinfo"></p>
+<p class="updated-at" data-bind="updatedAtMessage"></p>

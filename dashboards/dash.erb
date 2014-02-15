@@ -1,0 +1,50 @@
+<script type='text/javascript'>
+$(function() {
+  Dashing.widget_base_dimensions = [370, 340]
+  Dashing.numColumns = 5
+});
+</script>
+
+
+<% content_for :title do %>Wattics Internal Dashboard<% end %>
+
+<div class="gridster">
+  <ul>
+
+    <li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-view="Image" data-image="/logo.png"></div>
+    </li>
+
+    <li data-row="1" data-col="2" data-sizex="1" data-sizey="1">
+      <div data-view="Clock"></div>
+      <i class="icon-time icon-background"></i>
+    </li>
+
+    <li data-row="1" data-col="3" data-sizex="2" data-sizey="1">
+      <div data-id="continuous_integration" data-view="ContinuousIntegration" ></div>
+    </li>
+
+    <li data-row="1" data-col="5" data-sizex="1" data-sizey="3">
+      <div data-id="public_transports" data-view="PublicTransports"></div>
+    </li>
+
+    <li data-row="2" data-col="3" data-sizex="1" data-sizey="1">
+      <div data-id="website_visitor_count" data-view="Number" data-title="Website" data-moreinfo="Active Visitors" style="background-color:#9c4274;"></div>
+    </li>
+
+    <li data-row="2" data-col="4" data-sizex="1" data-sizey="1">
+      <div data-id="dash_visitor_count" data-view="Number" data-title="Dashboard" data-moreinfo="Active Visitors" style="background-color:#9c4274;"></div>
+    </li>
+
+    <li data-row="2" data-col="1" data-sizex="2" data-sizey="1">
+      <div data-id="dilbert_strip" data-view="DilbertStrip" ></div>
+    </li>
+
+    <li data-row="3" data-col="3" data-sizex="2" data-sizey="1">
+      <div data-id="twitter_mentions" data-view="Comments" style="background-color:#ff9618;"></div>
+      <i class="icon-twitter icon-background"></i>
+    </li>
+
+  </ul>
+
+</div>

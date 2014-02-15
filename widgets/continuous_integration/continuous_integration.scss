@@ -1,0 +1,107 @@
+$value-color:              #FFF;
+$background-color:         #4B4B4B;
+$background-error-color:   #A31F1F;
+$background-passed-color:  #8fb347;
+$background-pending-error-color: #631313;
+$background-pending-passed-color: #637c31;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+$label-color:       rgba(255, 255, 255, 0.7);
+
+
+@keyframes passed_anim{
+    from {background: $background-passed-color;}
+    to {background: $background-pending-passed-color;}
+}
+
+@-webkit-keyframes passed_anim
+{
+    from {background: $background-passed-color;}
+    to {background: $background-pending-passed-color;}
+}
+
+@keyframes failed_anim
+{
+    from {background: $background-error-color;}
+    to {background: $background-pending-error-color;}
+}
+
+@-webkit-keyframes failed_anim
+{
+    from {background: $background-error-color;}
+    to {background: $background-pending-error-color;}
+}
+
+
+.widget.widget-continuous-integration{
+
+  background-color: $background-color;
+  padding: 0px;
+  vertical-align: top;
+
+  img.background {
+    height: 100% !important;
+    position: absolute;
+    left: 200px;
+    top: 0;
+    opacity: 0.05;
+  }
+
+  .title {
+    color: $title-color;
+  }
+
+  .tal {
+    text-align: left;
+  }
+
+  .tac {
+    text-align: center;
+  }
+
+  .tar {
+    text-align: right;
+  }
+
+  .items{
+    list-style: none;
+
+    tr {
+      border-top:10px solid $background-color;
+
+      &.passed {
+        background-color: $background-passed-color;
+
+      }
+      &.failed {
+        background-color: $background-error-color;
+      }
+
+      &.pending_passed{
+          animation: passed_anim 2s alternate infinite;
+          -webkit-animation: passed_anim 2s alternate infinite; /* Safari and Chrome */
+      }
+
+       &.pending_failed{
+          animation: failed_anim 2s alternate infinite;
+          -webkit-animation: failed_anim 2s alternate infinite; /* Safari and Chrome */
+      }
+
+      .repo{
+        font-size:1.1em;
+        font-weight: bold;
+        padding-left:5px;
+      }
+
+      .branch{ font-size: 0.8em; }
+      .branch:before { content: "("; }
+      .branch:after { content: ")"; }
+
+      .build_number{ font-size: 0.8em; }
+      .build_number:before { content: "#"; }
+
+      .build_time{ font-size: 0.8em; }
+
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<!-- TRAM -->
+<img src="assets/tram.png" class="transport-img">
+<h2 class="transport-title"> Inbound </h2>
+<table class="transport-times">
+  <tr data-foreach-tram="trams_in">
+    <td class="tal" ><span data-bind="tram.dest"></span></td>
+    <td class="tar transport-value"><span data-bind="tram.time"></span></td>
+  </tr>
+<table>
+
+<h2 class="transport-title"> Outbound </h2>
+<table class="transport-times">
+  <tr data-foreach-tram="trams_out">
+    <td class="tal" ><span data-bind="tram.dest"></span></td>
+    <td class="tar transport-value"><span data-bind="tram.time"></span></td>
+  </tr>
+<table>
+<br /><br />
+
+<!-- BIKE -->
+<img src="assets/bike.png" class="transport-img">
+<table class="transport-times">
+  <tr data-foreach-station="bikes">
+    <td class="tal" ><span data-bind="station.name"></span></td>
+    <td class="tar transport-value"><span data-bind="station.val"></span></td>
+  </tr>
+<table>
+<br /><br/>
+
+<!-- BUS -->
+<img src="assets/bus.png" class="transport-img">
+<h2 class="transport-title"> Inbound </h2>
+<table class="transport-times">
+  <tr data-foreach-bus="buses_in">
+    <td class="tal"><span data-bind="bus.number"></span></td>
+    <td class="tac"><span data-bind="bus.dest"></span></td>
+    <td class="tar transport-value"><span data-bind="bus.time"></span></td>
+  </tr>
+<table>
+
+<h2 class="transport-title"> Outbound </h2>
+<table class="transport-times">
+  <tr data-foreach-bus="buses_out">
+    <td class="tal"><span data-bind="bus.number"></span></td>
+    <td class="tac"><span data-bind="bus.dest"></span></td>
+    <td class="tar transport-value"><span data-bind="bus.time"></span></td>
+  </tr>
+<table>
+
+<p class="more-info" data-bind="moreinfo"></p>
+<p class="updated-at" data-bind="updatedAtMessage"></p>
