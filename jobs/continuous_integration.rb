@@ -23,7 +23,8 @@ SCHEDULER.every '15s', :first_in => '1s'  do
     else
       build_status = "failed"
     end
-    build_status.insert(0, 'pending_') if job_details['building']
+    build_status.insert(0, 'pending_') if last_build_details['building']
+
 
     # Avatar url
     if last_build_details['culprits'].empty?
