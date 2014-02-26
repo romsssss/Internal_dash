@@ -9,11 +9,12 @@ SCHEDULER.every '15s', :first_in => '1s'  do
   jobs_name = client.job.list_all
 
   jobs_name.each do |job|
+    begin
     job_details = client.job.list_details(job)
     last_build_details = client.job.get_build_details(job, job_details['lastBuild']['number'])
 
     # Branch name
-    branch_name = last_build_details['actions'][2]['lastBuiltRevision']['branch'][0]['name'].split('/')
+    branch_name = last_build_details['actions'].keep_if {|h| h.has_key?('lastBuiltRevision')}.first['lastBuiltRevision']['branch'][0]['name'].split('/')
     branch_name.shift() # get ride of 'origin' in the name
     branch_name.join('/')
 
@@ -24,7 +25,6 @@ SCHEDULER.every '15s', :first_in => '1s'  do
       build_status = "failed"
     end
     build_status.insert(0, 'pending_') if last_build_details['building']
-
 
     # Avatar url
     if last_build_details['culprits'].empty?
@@ -42,6 +42,8 @@ SCHEDULER.every '15s', :first_in => '1s'  do
       build_status: build_status,
       avatar_url: avatar_url
     })
+    rescue
+    end
   end
 
   # Dynamic avatar size depending on the number of jobs
