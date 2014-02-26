@@ -2,19 +2,19 @@ require 'jenkins_api_client'
 require 'json'
 
 
-SCHEDULER.every '15s', :first_in => '1s'  do
+SCHEDULER.every '20s', :first_in => '1s'  do
   @jobs= []
 
   client = JenkinsApi::Client.new(server_url: settings.jenkins_server, server_port:settings.jenkins_server_port, username: settings.jenkins_username, password:settings.jenkins_password)
   jobs_name = client.job.list_all
 
   jobs_name.each do |job|
-    begin
+   begin
     job_details = client.job.list_details(job)
     last_build_details = client.job.get_build_details(job, job_details['lastBuild']['number'])
 
     # Branch name
-    branch_name = last_build_details['actions'].keep_if {|h| h.has_key?('lastBuiltRevision')}.first['lastBuiltRevision']['branch'][0]['name'].split('/')
+    branch_name = last_build_details['actions'].select {|h| h.has_key?('lastBuiltRevision')}.first['lastBuiltRevision']['branch'][0]['name'].split('/')
     branch_name.shift() # get ride of 'origin' in the name
     branch_name.join('/')
 
@@ -27,11 +27,14 @@ SCHEDULER.every '15s', :first_in => '1s'  do
     build_status.insert(0, 'pending_') if last_build_details['building']
 
     # Avatar url
-    if last_build_details['culprits'].empty?
-      avatar_url = "assets/unknown_user.png"
-    else
+    if last_build_details['actions'].select{ |h| h.has_key?('causes') }.first['causes'].first.has_key?('userId')
+      user_id = last_build_details['actions'].select{ |h| h.has_key?('causes') }.first['causes'].first['userId']
+      avatar_url = "#{settings.jenkins_server}:#{settings.jenkins_server_port}/user/#{user_id}/avatar/image"
+    elsif !last_build_details['culprits'].empty?
       user_id = last_build_details['culprits'][0]['absoluteUrl'].split('/').last
       avatar_url = "#{settings.jenkins_server}:#{settings.jenkins_server_port}/user/#{user_id}/avatar/image"
+    else
+      avatar_url = "assets/unknown_user.png"
     end
 
     @jobs.push({
@@ -42,8 +45,9 @@ SCHEDULER.every '15s', :first_in => '1s'  do
       build_status: build_status,
       avatar_url: avatar_url
     })
-    rescue
-    end
+   rescue
+    puts "+++++ Error for #{job}"
+   end
   end
 
   # Dynamic avatar size depending on the number of jobs
